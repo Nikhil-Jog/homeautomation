@@ -1,0 +1,6 @@
+set(router_SETUP_PY_VERSION "0.0.0")
+set(router_SETUP_PY_SCRIPTS "")
+set(router_SETUP_PY_PACKAGES "router")
+set(router_SETUP_PY_PACKAGE_DIRS "src/router")
+set(router_SETUP_PY_MODULES "")
+set(router_SETUP_PY_MODULE_DIRS "")

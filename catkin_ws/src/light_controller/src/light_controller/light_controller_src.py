@@ -1,4 +1,3 @@
-import serial
 import rospy
 from std_msgs.msg import Float32, Bool, String
 import ast
@@ -15,10 +14,11 @@ def collect_data():
     while not rospy.is_shutdown():
         rate.sleep()
 
-def main():
+def light_controller_main():
     rospy.init_node('light_controller', anonymous=True)
     rospy.Subscriber("/pi/light", Float32, light_callback)
     rospy.Subscriber("/router/devices", String, devices_callback)
+    rospy.loginfo('Light Controller Init')
     while(1):
         try:
             collect_data()

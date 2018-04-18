@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/pi/homeautomation/catkin_ws/devel/setup.sh

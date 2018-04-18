@@ -1,0 +1,2 @@
+comms:light_controller:router
+-DCATKIN_DEVEL_PREFIX=/home/pi/homeautomation/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/pi/homeautomation/catkin_ws/install -G Unix Makefiles
