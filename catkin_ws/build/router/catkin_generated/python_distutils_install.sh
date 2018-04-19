@@ -14,20 +14,20 @@ fi
 
 echo_and_run() { echo "+ $@" ; "$@" ; }
 
-echo_and_run cd "/home/pi/homeautomation/catkin_ws/src/router"
+echo_and_run cd "/home/njog/homeautomation/catkin_ws/src/router"
 
-# ensure that Python install destination exists
-echo_and_run mkdir -p "$DESTDIR/home/pi/homeautomation/catkin_ws/install/lib/python2.7/dist-packages"
+# snsure that Python install destination exists
+echo_and_run mkdir -p "$DESTDIR/home/njog/homeautomation/catkin_ws/install/lib/python2.7/dist-packages"
 
 # Note that PYTHONPATH is pulled from the environment to support installing
 # into one location when some dependencies were installed in another
 # location, #123.
 echo_and_run /usr/bin/env \
-    PYTHONPATH="/home/pi/homeautomation/catkin_ws/install/lib/python2.7/dist-packages:/home/pi/homeautomation/catkin_ws/build/lib/python2.7/dist-packages:$PYTHONPATH" \
-    CATKIN_BINARY_DIR="/home/pi/homeautomation/catkin_ws/build" \
+    PYTHONPATH="/home/njog/homeautomation/catkin_ws/install/lib/python2.7/dist-packages:/home/njog/homeautomation/catkin_ws/build/lib/python2.7/dist-packages:$PYTHONPATH" \
+    CATKIN_BINARY_DIR="/home/njog/homeautomation/catkin_ws/build" \
     "/usr/bin/python" \
-    "/home/pi/homeautomation/catkin_ws/src/router/setup.py" \
-    build --build-base "/home/pi/homeautomation/catkin_ws/build/router" \
+    "/home/njog/homeautomation/catkin_ws/src/router/setup.py" \
+    build --build-base "/home/njog/homeautomation/catkin_ws/build/router" \
     install \
     $DESTDIR_ARG \
-    --install-layout=deb --prefix="/home/pi/homeautomation/catkin_ws/install" --install-scripts="/home/pi/homeautomation/catkin_ws/install/bin"
+    --install-layout=deb --prefix="/home/njog/homeautomation/catkin_ws/install" --install-scripts="/home/njog/homeautomation/catkin_ws/install/bin"

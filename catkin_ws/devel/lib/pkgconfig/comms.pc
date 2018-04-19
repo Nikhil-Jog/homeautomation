@@ -1,8 +1,8 @@
-prefix=/home/pi/homeautomation/catkin_ws/devel
+prefix=/home/njog/homeautomation/catkin_ws/devel
 
 Name: comms
 Description: Description of comms
 Version: 0.0.0
-Cflags: -I/home/pi/homeautomation/catkin_ws/src/comms/src
-Libs: -L/home/pi/homeautomation/catkin_ws/devel/lib -lcomms
+Cflags: -I/home/njog/homeautomation/catkin_ws/src/comms/src
+Libs: -L/home/njog/homeautomation/catkin_ws/devel/lib -lcomms
 Requires: message_runtime

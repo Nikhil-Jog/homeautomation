@@ -1,0 +1,8 @@
+prefix=/home/njog/homeautomation/catkin_ws/devel
+
+Name: mock
+Description: Description of mock
+Version: 0.0.0
+Cflags: -I/home/njog/homeautomation/catkin_ws/src/mock/src
+Libs: -L/home/njog/homeautomation/catkin_ws/devel/lib -lmock
+Requires: message_runtime

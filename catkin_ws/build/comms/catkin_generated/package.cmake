@@ -10,7 +10,4 @@ set(comms_EXEC_DEPENDS "message_runtime" "message_generation" "rospy" "std_msgs"
 set(comms_RUN_DEPENDS "message_runtime" "message_generation" "rospy" "std_msgs")
 set(comms_TEST_DEPENDS )
 set(comms_DOC_DEPENDS )
-set(comms_URL_WEBSITE "")
-set(comms_URL_BUGTRACKER "")
-set(comms_URL_REPOSITORY "")
 set(comms_DEPRECATED "")

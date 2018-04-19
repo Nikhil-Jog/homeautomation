@@ -1,8 +1,8 @@
-prefix=/home/pi/homeautomation/catkin_ws/devel
+prefix=/home/njog/homeautomation/catkin_ws/devel
 
 Name: light_controller
 Description: Description of light_controller
 Version: 0.0.0
-Cflags: -I/home/pi/homeautomation/catkin_ws/src/light_controller/src
-Libs: -L/home/pi/homeautomation/catkin_ws/devel/lib -llight_controller
+Cflags: -I/home/njog/homeautomation/catkin_ws/src/light_controller/src
+Libs: -L/home/njog/homeautomation/catkin_ws/devel/lib -llight_controller
 Requires: message_runtime

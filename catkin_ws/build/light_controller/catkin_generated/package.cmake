@@ -10,7 +10,4 @@ set(light_controller_EXEC_DEPENDS "message_runtime" "message_generation" "rospy"
 set(light_controller_RUN_DEPENDS "message_runtime" "message_generation" "rospy" "std_msgs")
 set(light_controller_TEST_DEPENDS )
 set(light_controller_DOC_DEPENDS )
-set(light_controller_URL_WEBSITE "")
-set(light_controller_URL_BUGTRACKER "")
-set(light_controller_URL_REPOSITORY "")
 set(light_controller_DEPRECATED "")

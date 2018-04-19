@@ -10,7 +10,4 @@ set(router_EXEC_DEPENDS "message_runtime" "message_generation" "rospy" "std_msgs
 set(router_RUN_DEPENDS "message_runtime" "message_generation" "rospy" "std_msgs")
 set(router_TEST_DEPENDS )
 set(router_DOC_DEPENDS )
-set(router_URL_WEBSITE "")
-set(router_URL_BUGTRACKER "")
-set(router_URL_REPOSITORY "")
 set(router_DEPRECATED "")

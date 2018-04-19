@@ -1,0 +1,4 @@
+<launch>
+    <node name="mock" pkg="mock" type="node" output="screen"/>
+    <node name="light_controller" pkg="light_controller" type="node" output="screen"/>
+</launch>
