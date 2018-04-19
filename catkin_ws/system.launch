@@ -1,0 +1,5 @@
+<launch>
+    <node name="comms" pkg="comms" type="node" output="screen"/>
+    <node name="router" pkg="router" type="node" output="screen"/>
+    <node name="light_controller" pkg="light_controller" type="node" output="screen"/>
+</launch>

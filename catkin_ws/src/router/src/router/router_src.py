@@ -26,17 +26,17 @@ def collect_data():
 
     while not rospy.is_shutdown():
         dev = get_devices()
-        router_pub.publish(str(dev))
+        router_pub.publish(json.dumps(dev))
         rate.sleep()
 
 def router_main():
     rospy.init_node('router', anonymous=True)
     while(1):
-        try:
-            collect_data()
-        except Exception as ex:
-            rospy.loginfo(ex)
-            pass
+        # try:
+        collect_data()
+        # except Exception as ex:
+            # rospy.loginfo(ex)
+            # pass
 
 if __name__ == '__main__':
     router_main()
