@@ -9,9 +9,9 @@ current_light = [0, 0]
 current_devices = None 
 
 zone_presence = [0, 0]
-min_sensor_brightness = 125
+min_sensor_brightness = 50
 hz = 10
-light_rate = -1.0/hz    #per second
+light_rate = -5.0/hz    #per second
 target_brightness = 254
 
 def set_light(lights, state, brightness):
@@ -21,7 +21,7 @@ def set_light(lights, state, brightness):
     for i in range(len(lights)):
         req = json.dumps({'on':state, 'bri':int(brightness)})
         addr = base_addr.format(lights[i]);
-        # r = requests.put(addr, req);
+        r = requests.put(addr, req);
 
 def light1_callback(data):
     global current_light
@@ -67,11 +67,11 @@ def dark_feedback_callback(data):
     global light_rate
     global min_sensor_brightness
     global current_light
-    target_brightness = max(current_light) + 50
-    light_rate = light_rate * 0.9
-    min_sensor_brightness = max(current_light) + 10
-
-    rospy.loginfo('Feedback Received: Too Dark. New Rate: {}, New Min: {}'.format(light_rate, min_sensor_brightness))
+    min_sensor_brightness = target_brightness + 10
+    target_brightness = target_brightness + 50
+    light_rate = light_rate * 0.75
+    
+    rospy.loginfo('Feedback Received: Too Dark. New Target: {}, New Rate: {}, New Min: {}'.format(target_brightness, light_rate, min_sensor_brightness))
 
 
 def weather_update_callback(data):
@@ -125,9 +125,9 @@ def collect_data():
         for i in xrange(len(zone_presence)):
             if (zone_presence[i]):
                 motion_timer[i] = ctime + motion_on_timeout
-                if (current_light[i] < min_sensor_brightness):
-                    set_light(zone_lights[i], True, target_brightness)
-                    zone_published[i] = False;
+                # if (current_light[i] < min_sensor_brightness):
+                set_light(zone_lights[i], True, target_brightness)
+                zone_published[i] = False;
 
             elif ((motion_timer[i] - ctime) > motion_off_timeout):
                 motion_timer[i] = ctime + motion_off_timeout
@@ -145,7 +145,6 @@ def collect_data():
             target_brightness = min(max(target_brightness + light_rate, min_sensor_brightness), 254)
             if (target_brightness >= 254):
                 light_rate = -1.0/10
-
         rate.sleep()
 
 

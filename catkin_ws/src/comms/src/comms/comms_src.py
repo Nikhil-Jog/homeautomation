@@ -25,6 +25,7 @@ def collect_data():
     while not rospy.is_shutdown():
         if (ser.inWaiting()):
             data = ser.readline().strip().split(' ')
+            # rospy.loginfo(data)
             light_pub.publish(float(data[0]))
             temp_pub.publish(float(data[1]))
             zone2_pub.publish(int(data[2]))
