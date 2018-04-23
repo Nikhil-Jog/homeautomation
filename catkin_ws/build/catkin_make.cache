@@ -1,2 +1,0 @@
-comms:light_controller:mock:router
--DCATKIN_DEVEL_PREFIX=/home/njog/homeautomation/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/njog/homeautomation/catkin_ws/install -G Unix Makefiles

@@ -1,6 +1,0 @@
-set(light_controller_SETUP_PY_VERSION "0.0.0")
-set(light_controller_SETUP_PY_SCRIPTS "")
-set(light_controller_SETUP_PY_PACKAGES "light_controller")
-set(light_controller_SETUP_PY_PACKAGE_DIRS "src/light_controller")
-set(light_controller_SETUP_PY_MODULES "")
-set(light_controller_SETUP_PY_MODULE_DIRS "")

@@ -1,8 +1,0 @@
-prefix=/home/njog/homeautomation/catkin_ws/install
-
-Name: comms
-Description: Description of comms
-Version: 0.0.0
-Cflags: -I/home/njog/homeautomation/catkin_ws/install/include
-Libs: -L/home/njog/homeautomation/catkin_ws/install/lib -lcomms
-Requires: message_runtime

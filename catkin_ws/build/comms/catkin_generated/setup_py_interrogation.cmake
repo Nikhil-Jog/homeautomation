@@ -1,6 +1,0 @@
-set(comms_SETUP_PY_VERSION "0.0.0")
-set(comms_SETUP_PY_SCRIPTS "")
-set(comms_SETUP_PY_PACKAGES "comms")
-set(comms_SETUP_PY_PACKAGE_DIRS "src/comms")
-set(comms_SETUP_PY_MODULES "")
-set(comms_SETUP_PY_MODULE_DIRS "")
