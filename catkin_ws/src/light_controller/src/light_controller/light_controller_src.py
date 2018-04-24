@@ -14,6 +14,8 @@ hz = 10
 light_rate = -5.0/hz    #per second
 target_brightness = 254
 
+prev_weather = 0
+
 def set_light(lights, state, brightness):
     ip = "http://10.0.0.85/api/"
     username = "aX7y2eDnFfLiUgxbr4SUxybQ96iLlb7fASQMO2Pz"
@@ -21,7 +23,7 @@ def set_light(lights, state, brightness):
     for i in range(len(lights)):
         req = json.dumps({'on':state, 'bri':int(brightness)})
         addr = base_addr.format(lights[i]);
-        r = requests.put(addr, req);
+        # r = requests.put(addr, req);
 
 def light1_callback(data):
     global current_light
@@ -67,9 +69,9 @@ def dark_feedback_callback(data):
     global light_rate
     global min_sensor_brightness
     global current_light
-    min_sensor_brightness = target_brightness + 10
+    min_sensor_brightness = target_brightness - 10
     target_brightness = target_brightness + 50
-    light_rate = light_rate * 0.75
+    light_rate = -abs(light_rate) * 0.75
     
     rospy.loginfo('Feedback Received: Too Dark. New Target: {}, New Rate: {}, New Min: {}'.format(target_brightness, light_rate, min_sensor_brightness))
 
@@ -77,18 +79,32 @@ def dark_feedback_callback(data):
 def weather_update_callback(data):
     global current_light
     global light_rate
+    global min_sensor_brightness
+    global prev_weather
     rate = light_rate
     weather = data.data #data = 0 -> !Cloudy, data = 1 -> Cloudy
+
+    if (weather == prev_weather):
+        return
+
+    prev_weather = weather
+
     if (current_light > 200):
         if (weather == 0):
-            rate = -abs(rate)
+            min_sensor_brightness = min_sensor_brightness - 30
+            rate = -abs(0.05*(target_brightness - min_sensor_brightness))
+            pass
         else:
             rate = abs(rate)
+            min_sensor_brightness = min_sensor_brightness + 25
     else:
         if (weather == 1):
             rate = abs(rate) * 2
+            min_sensor_brightness = min_sensor_brightness + 25
         else:
-            rate = -abs(rate)
+            min_sensor_brightness = min_sensor_brightness - 30
+            rate = -abs(0.05*(target_brightness - min_sensor_brightness))
+            pass
 
     rospy.loginfo('Weather Update: {}. Old Rate: {}, New Rate: {}'.format(weather, light_rate, rate))
     light_rate = rate
@@ -119,8 +135,13 @@ def collect_data():
 
     light_pubs = [rospy.Publisher('/lc/zone1', Int32, queue_size=10), rospy.Publisher('/lc/zone2', Int32, queue_size=10)]
 
+    min_pub = rospy.Publisher('/lc/min', Int32, queue_size=10)
+    rate_pub = rospy.Publisher('/lc/rate', Float32, queue_size=10)
+
     while not rospy.is_shutdown():
         ctime = int(time())
+        min_pub.publish(min_sensor_brightness)
+        rate_pub.publish(light_rate)
         # Check for motion
         for i in xrange(len(zone_presence)):
             if (zone_presence[i]):
@@ -142,9 +163,18 @@ def collect_data():
                 light_pubs[i].publish(0)
         
         if (any(zone_presence)):
-            target_brightness = min(max(target_brightness + light_rate, min_sensor_brightness), 254)
+            # target_brightness = min(max(target_brightness + light_rate, min_sensor_brightness), 254)
+            target_brightness = target_brightness + light_rate
             if (target_brightness >= 254):
                 light_rate = -1.0/10
+
+            if (target_brightness < min_sensor_brightness):
+                light_rate = 0.15 * (min_sensor_brightness - target_brightness)
+
+
+            if (abs(light_rate) < 0.005):
+                light_rate = 0.1 * (target_brightness - min_sensor_brightness)
+
         rate.sleep()
 
 
